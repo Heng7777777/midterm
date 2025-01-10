@@ -37,7 +37,7 @@ X_num = np.array(
             Online_boarding,
         ]
     ],
-    dtype=np.float64,  # Use float64 for decimal values
+    dtype=np.int32,  # Use float64 for decimal values
 )
 
 # 4. import model
@@ -59,6 +59,7 @@ X = scale.transform(X_num)  # Use transform instead of fit_transform for pre-fit
 # Make prediction
 prediction = lg_model.predict(X)
 prediction_decoded = encode.inverse_transform(prediction)
+st.write("Satisfaction", prediction_decoded)
 
 # Combine input features and prediction into a DataFrame
 data = np.concatenate([X, prediction_decoded.reshape(-1, 1)], axis=1)  # Use np.concatenate
@@ -81,4 +82,4 @@ df = pd.DataFrame(
 )
 
 # Display the DataFrame
-st.write(df)
+# st.write(df)
